@@ -1,0 +1,23 @@
+
+name: AttendanceCheck
+main: com.minkang.attendance.AttendancePlugin
+version: 1.2.0
+api-version: 1.16
+softdepend: [PlaceholderAPI]
+authors: [ "MinKang" ]
+commands:
+  출석체크:
+    description: 출석체크 GUI 열기 및 설정
+    usage: /출석체크 [설정|초기화 <플레이어>]
+    aliases: [attendance, daily, checkin]
+  공지:
+    description: 서버 전체 공지
+    usage: /공지 <할말>
+    aliases: [notice, broadcast]
+permissions:
+  attendance.admin:
+    description: 출석체크 설정 메뉴 권한
+    default: op
+  attendance.notice:
+    description: 전체 공지 권한
+    default: op
