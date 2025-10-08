@@ -15,9 +15,7 @@ import java.util.Map;
 
 public class MessageUtil {
 
-    public static boolean hasPapi() {
-        return Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI");
-    }
+    public static boolean hasPapi() { return Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"); }
 
     public static String color(String s) {
         return ChatColor.translateAlternateColorCodes('&', s == null ? "" : s);
@@ -30,12 +28,8 @@ public class MessageUtil {
                 out = out.replace("{" + e.getKey() + "}", e.getValue());
             }
         }
-        if (p != null) {
-            out = out.replace("{player}", p.getName());
-        }
-        if (hasPapi() && p != null) {
-            out = PlaceholderAPI.setPlaceholders(p, out);
-        }
+        if (p != null) out = out.replace("{player}", p.getName());
+        if (hasPapi() && p != null) out = PlaceholderAPI.setPlaceholders(p, out);
         return color(out);
     }
 

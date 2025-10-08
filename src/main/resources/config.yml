@@ -1,33 +1,32 @@
+cycle-days: 28
+allow-claim-once-per-day: true
 
-# 출석체크 기본 설정
-cycle-days: 28           # 사이클 길이 (이미지처럼 28일)
-allow-claim-once-per-day: true  # 같은 날 중복 수령 방지
 gui:
   title: "&6&lPREMIUM &f&lDAILY"
-  bonus-button-slot: 49  # 0~53
+  bonus-button-slot: 49
   bonus-button:
     material: LIME_CONCRETE
     name: "&a&lBONUS!!"
     lore:
       - "&7사이클 보상을 모두 수령하면 받을 수 있어요."
+
 texts:
   already-claimed-today: "&c오늘은 이미 출석 보상을 받았습니다."
-  claimed: "&a{day}일차 출석 보상을 받았습니다! (진행도: {progress}/{cycle})"
+  claimed: "&a{day}일차 보상 수령! (진행도: {progress}/{cycle})"
   not-available: "&c아직 수령할 수 없는 날입니다."
-  bonus-ready: "&a보너스를 받을 수 있어요!"
+  bonus-ready: "&c아직 보너스를 받을 수 없습니다."
   bonus-claimed: "&b보너스 보상을 받았습니다! 새 사이클이 시작됩니다."
   open-settings: "&7설정 GUI를 열었습니다."
+
 rewards:
-  # 각 일차의 보상. 기본 예시만 넣어두었습니다. GUI에서 수정 가능.
-  # commands는 콘솔에서 실행되며 {player}가 플레이어명으로 치환됩니다.
   "1":
     icon:
       material: PAPER
       name: "&a1일차 보상"
-      lore:
-        - "&7다음 보상을 받으려면 오늘 먼저 수령하세요."
+      lore: []
     commands:
       - "give {player} diamond 1"
+    items: []
   "2":
     icon:
       material: PAPER
@@ -35,7 +34,8 @@ rewards:
       lore: []
     commands:
       - "give {player} emerald 2"
-  # ...
+    items: []
+
 bonus:
   icon:
     material: CHEST
@@ -44,9 +44,8 @@ bonus:
       - "&7사이클을 모두 채우면 수령!"
   commands:
     - "give {player} nether_star 1"
+  items: []
 
-
-# 사운드 / 타이틀 연출 (1.16.5 사운드명 사용)
 sounds:
   enable: true
   click: UI_BUTTON_CLICK
@@ -66,20 +65,14 @@ titles:
     title: "&6보너스 수령 완료!"
     subtitle: "&7새 사이클이 시작됩니다."
 
-# 메시지에서 사용 가능한 변수:
-# {player}, {day}, {progress}, {cycle}, {next}, {bonus_ready}, {claimed_today}
-# 그리고 PlaceholderAPI가 있으면 %player_name%, %server_online% 등 PAPI도 함께 치환됩니다.
-
-
-# /공지 <메시지> 설정
 announce:
   enable: true
   chat:
     header: "&6&l━━━━━━━━━ &e&l공지 &6&l━━━━━━━━━"
-    footer: "&6&l━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    message-format: "&f{message}"
     show-sender: true
     sender-format: "&7From &f{sender}"
-    message-format: "&f{message}"   # PAPI 및 위 변수 치환 가능
+    footer: "&6&l━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   title:
     enable: true
     title: "&e&l공지"
@@ -88,3 +81,6 @@ announce:
     enable: true
     text: "&6[공지]&f {message}"
   sound: UI_TOAST_IN
+
+# Citizens NPC ids that open attendance GUI on right-click
+citizens-links: []

@@ -4,22 +4,14 @@ package com.minkang.attendance.util;
 import com.minkang.attendance.AttendancePlugin;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.entity.Player;
-
 import java.util.UUID;
 
 public class PapiHook extends PlaceholderExpansion {
 
-    @Override
-    public String getIdentifier() { return "attendance"; }
-
-    @Override
-    public String getAuthor() { return "MinKang"; }
-
-    @Override
-    public String getVersion() { return "1.0.0"; }
-
-    @Override
-    public boolean persist() { return true; }
+    @Override public String getIdentifier() { return "attendance"; }
+    @Override public String getAuthor() { return "MinKang"; }
+    @Override public String getVersion() { return "1.5.0"; }
+    @Override public boolean persist() { return true; }
 
     @Override
     public String onPlaceholderRequest(Player p, String params) {

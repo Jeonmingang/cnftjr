@@ -7,7 +7,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,9 +28,7 @@ public class ItemBuilder {
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
             List<String> result = new ArrayList<>();
-            if (lore != null) {
-                for (String s : lore) result.add(ChatColor.translateAlternateColorCodes('&', s));
-            }
+            if (lore != null) for (String s : lore) result.add(ChatColor.translateAlternateColorCodes('&', s));
             meta.setLore(result);
             item.setItemMeta(meta);
         }
