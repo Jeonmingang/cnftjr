@@ -3,7 +3,7 @@ main: com.minkang.attendance.AttendancePlugin
 version: 1.5.1
 api-version: 1.16
 softdepend: [PlaceholderAPI, Citizens]
-authors: [ "MinKang" ]
+authors: [MinKang]
 commands:
   출석체크:
     description: 출석체크 GUI 열기 및 설정
