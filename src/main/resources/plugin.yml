@@ -1,6 +1,6 @@
 name: AttendanceCheck
 main: com.minkang.attendance.AttendancePlugin
-version: 1.5.2
+version: 1.5.3
 api-version: 1.16
 softdepend: [PlaceholderAPI, Citizens]
 authors: [MinKang]
