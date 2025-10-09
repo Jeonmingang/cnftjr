@@ -78,6 +78,17 @@ public class RewardManager implements Listener {
         Reward rw = getReward(day);
         java.util.List<org.bukkit.inventory.ItemStack> items = rw.getItems();
         if (items != null) for (org.bukkit.inventory.ItemStack it : items) {
+            // 미리보기용 종이(실행: )은 지급하지 않음
+            try {
+                if (it.getType() == org.bukkit.Material.PAPER) {
+                    org.bukkit.inventory.meta.ItemMeta m = it.getItemMeta();
+                    if (m != null && m.hasDisplayName()) {
+                        String dn = org.bukkit.ChatColor.stripColor(m.getDisplayName());
+                        if (dn != null && dn.startsWith("실행:")) continue;
+                    }
+                }
+            } catch (Throwable ignore) {}
+
             if (it == null) continue;
             java.util.Map<Integer, org.bukkit.inventory.ItemStack> left = p.getInventory().addItem(it.clone());
             for (org.bukkit.inventory.ItemStack leftover : left.values()) p.getWorld().dropItemNaturally(p.getLocation(), leftover);
@@ -92,6 +103,17 @@ public class RewardManager implements Listener {
         if (bonusReward == null) return;
         java.util.List<org.bukkit.inventory.ItemStack> items = bonusReward.getItems();
         if (items != null) for (org.bukkit.inventory.ItemStack it : items) {
+            // 미리보기용 종이(실행: )은 지급하지 않음
+            try {
+                if (it.getType() == org.bukkit.Material.PAPER) {
+                    org.bukkit.inventory.meta.ItemMeta m = it.getItemMeta();
+                    if (m != null && m.hasDisplayName()) {
+                        String dn = org.bukkit.ChatColor.stripColor(m.getDisplayName());
+                        if (dn != null && dn.startsWith("실행:")) continue;
+                    }
+                }
+            } catch (Throwable ignore) {}
+
             if (it == null) continue;
             java.util.Map<Integer, org.bukkit.inventory.ItemStack> left = p.getInventory().addItem(it.clone());
             for (org.bukkit.inventory.ItemStack leftover : left.values()) p.getWorld().dropItemNaturally(p.getLocation(), leftover);
