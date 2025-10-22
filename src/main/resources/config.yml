@@ -84,3 +84,13 @@ announce:
 
 # Citizens NPC ids that open attendance GUI on right-click
 citizens-links: []
+
+
+# 미리보기 GUI에서 '실행: <명령>' 종이 아이템 표시 여부
+preview:
+  show-command-papers: false
+
+
+# 보상으로 'PAPER' 아이템이 지급되지 않도록 강제 차단 (기본 false)
+rewards:
+  allow-paper: false

@@ -66,14 +66,16 @@ public class PreviewGui implements Listener {
         inv.setItem(13, reward.getIcon());
 
         // 2) 실행될 명령어 목록(안내용 종이)
-        List<String> cmds = reward.getCommands();
-        int[] cmdSlots = new int[]{18,19,20,21,22,23,24,25};
-        int c = 0;
-        if (cmds != null) {
-            for (String cmd : cmds) {
-                if (cmd == null || cmd.trim().isEmpty()) continue;
-                if (c >= cmdSlots.length) break;
-                inv.setItem(cmdSlots[c++], commandPaper(cmd));
+        if (plugin.getConfig().getBoolean("preview.show-command-papers", false)) {
+            java.util.List<String> cmds = reward.getCommands();
+            int[] cmdSlots = new int[]{18,19,20,21,22,23,24,25};
+            int c = 0;
+            if (cmds != null) {
+                for (String cmd : cmds) {
+                    if (cmd == null || cmd.trim().isEmpty()) continue;
+                    if (c >= cmdSlots.length) break;
+                    inv.setItem(cmdSlots[c++], commandPaper(cmd));
+                }
             }
         }
         // 3) 닫기 버튼
