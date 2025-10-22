@@ -87,7 +87,7 @@ for (int i = 1; i <= Math.min(rewards.getCycleDays(), daySlots.size()); i++) {
         for (int i = 0; i < Math.min(plugin.rewards().getCycleDays(), daySlots.size()); i++) if (e.getRawSlot() == daySlots.get(i)) { day = i+1; break; }
         if (day == -1) return;
         
-        tokens.put(\"day\", String.valueOf(day));
+        tokens.put("day", String.valueOf(day));
 if (e.isRightClick()) { new PreviewGui(p, "&e" + day + "일차 보상 미리보기", plugin.rewards().getReward(day)).open(); return; }
         boolean claimable = (day == nextDay);
         if (!claimable) { p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.not-available", "&c아직 수령할 수 없는 날입니다."), p, tokens)); MessageUtil.sound(p, "sounds.error"); return; }
