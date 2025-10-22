@@ -42,11 +42,12 @@ public class DailyGui implements Listener {
         java.util.List<Integer> daySlots = rewards.daySlots();
         UUID id = player.getUniqueId();
         int progress = store.getProgress(id);
-        \1
+        int nextDay = progress + 1;
+        
         java.util.Map<String, String> tokens = new java.util.HashMap<>();
-        tokens.put(\"progress\", String.valueOf(progress));
-        tokens.put(\"cycle\", String.valueOf(rewards.getCycleDays()));
-        tokens.put(\"next\", String.valueOf(nextDay));
+        tokens.put("progress", String.valueOf(progress));
+        tokens.put("cycle", String.valueOf(rewards.getCycleDays()));
+        tokens.put("next", String.valueOf(nextDay));
 for (int i = 1; i <= Math.min(rewards.getCycleDays(), daySlots.size()); i++) {
             int slot = daySlots.get(i-1);
             boolean claimed = store.hasClaimed(id, i);
@@ -70,12 +71,8 @@ for (int i = 1; i <= Math.min(rewards.getCycleDays(), daySlots.size()); i++) {
         UUID id = p.getUniqueId();
         java.util.List<Integer> daySlots = rewards.daySlots();
         int progress = store.getProgress(id);
-        \1
-        java.util.Map<String, String> tokens = new java.util.HashMap<>();
-        tokens.put(\"progress\", String.valueOf(progress));
-        tokens.put(\"cycle\", String.valueOf(rewards.getCycleDays()));
-        tokens.put(\"next\", String.valueOf(nextDay));
-int bonusSlot = plugin.getConfig().getInt("gui.bonus-button-slot", 49);
+        int nextDay = progress + 1;
+        int bonusSlot = plugin.getConfig().getInt("gui.bonus-button-slot", 49);
         if (e.getRawSlot() == bonusSlot) {
             if (e.isRightClick()) { new PreviewGui(p, "&6보너스 미리보기", plugin.rewards().getBonusReward()).open(); return; }
             if (progress >= rewards.getCycleDays()) {
@@ -88,7 +85,8 @@ int bonusSlot = plugin.getConfig().getInt("gui.bonus-button-slot", 49);
         }
         int day = -1;
         for (int i = 0; i < Math.min(plugin.rewards().getCycleDays(), daySlots.size()); i++) if (e.getRawSlot() == daySlots.get(i)) { day = i+1; break; }
-        \1
+        if (day == -1) return;
+        
         tokens.put(\"day\", String.valueOf(day));
 if (e.isRightClick()) { new PreviewGui(p, "&e" + day + "일차 보상 미리보기", plugin.rewards().getReward(day)).open(); return; }
         boolean claimable = (day == nextDay);
