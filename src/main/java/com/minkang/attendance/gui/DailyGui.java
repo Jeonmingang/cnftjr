@@ -42,8 +42,12 @@ public class DailyGui implements Listener {
         java.util.List<Integer> daySlots = rewards.daySlots();
         UUID id = player.getUniqueId();
         int progress = store.getProgress(id);
-        int nextDay = progress + 1;
-        for (int i = 1; i <= Math.min(rewards.getCycleDays(), daySlots.size()); i++) {
+        \1
+        java.util.Map<String, String> tokens = new java.util.HashMap<>();
+        tokens.put(\"progress\", String.valueOf(progress));
+        tokens.put(\"cycle\", String.valueOf(rewards.getCycleDays()));
+        tokens.put(\"next\", String.valueOf(nextDay));
+for (int i = 1; i <= Math.min(rewards.getCycleDays(), daySlots.size()); i++) {
             int slot = daySlots.get(i-1);
             boolean claimed = store.hasClaimed(id, i);
             boolean claimable = (i == nextDay);
@@ -66,25 +70,30 @@ public class DailyGui implements Listener {
         UUID id = p.getUniqueId();
         java.util.List<Integer> daySlots = rewards.daySlots();
         int progress = store.getProgress(id);
-        int nextDay = progress + 1;
-        int bonusSlot = plugin.getConfig().getInt("gui.bonus-button-slot", 49);
+        \1
+        java.util.Map<String, String> tokens = new java.util.HashMap<>();
+        tokens.put(\"progress\", String.valueOf(progress));
+        tokens.put(\"cycle\", String.valueOf(rewards.getCycleDays()));
+        tokens.put(\"next\", String.valueOf(nextDay));
+int bonusSlot = plugin.getConfig().getInt("gui.bonus-button-slot", 49);
         if (e.getRawSlot() == bonusSlot) {
             if (e.isRightClick()) { new PreviewGui(p, "&6보너스 미리보기", plugin.rewards().getBonusReward()).open(); return; }
             if (progress >= rewards.getCycleDays()) {
                 plugin.rewards().giveBonus(p); store.resetCycle(id);
-                p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.bonus-claimed", "&b보너스 보상을 받았습니다!"), p, null));
+                p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.bonus-claimed", "&b보너스 보상을 받았습니다!"), p, tokens));
                 MessageUtil.title(p, plugin.getConfig().getString("titles.bonus.title", "&6보너스!"), plugin.getConfig().getString("titles.bonus.subtitle", ""));
                 MessageUtil.sound(p, "sounds.bonus"); draw();
-            } else { p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.bonus-ready", "&c아직 보너스를 받을 수 없습니다."), p, null)); MessageUtil.sound(p, "sounds.error"); }
+            } else { p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.bonus-ready", "&c아직 보너스를 받을 수 없습니다."), p, tokens)); MessageUtil.sound(p, "sounds.error"); }
             return;
         }
         int day = -1;
         for (int i = 0; i < Math.min(plugin.rewards().getCycleDays(), daySlots.size()); i++) if (e.getRawSlot() == daySlots.get(i)) { day = i+1; break; }
-        if (day == -1) return;
-        if (e.isRightClick()) { new PreviewGui(p, "&e" + day + "일차 보상 미리보기", plugin.rewards().getReward(day)).open(); return; }
+        \1
+        tokens.put(\"day\", String.valueOf(day));
+if (e.isRightClick()) { new PreviewGui(p, "&e" + day + "일차 보상 미리보기", plugin.rewards().getReward(day)).open(); return; }
         boolean claimable = (day == nextDay);
-        if (!claimable) { p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.not-available", "&c아직 수령할 수 없는 날입니다."), p, null)); MessageUtil.sound(p, "sounds.error"); return; }
-        if (plugin.getConfig().getBoolean("allow-claim-once-per-day", true) && store.claimedToday(id)) { p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.already-claimed-today", "&c오늘은 이미 받았습니다."), p, null)); MessageUtil.sound(p, "sounds.error"); return; }
+        if (!claimable) { p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.not-available", "&c아직 수령할 수 없는 날입니다."), p, tokens)); MessageUtil.sound(p, "sounds.error"); return; }
+        if (plugin.getConfig().getBoolean("allow-claim-once-per-day", true) && store.claimedToday(id)) { p.sendMessage(MessageUtil.fmt(plugin.getConfig().getString("texts.already-claimed-today", "&c오늘은 이미 받았습니다."), p, tokens)); MessageUtil.sound(p, "sounds.error"); return; }
         plugin.rewards().giveReward(p, day); store.markClaimed(id, day);
         MessageUtil.title(p, plugin.getConfig().getString("titles.claim.title", "&a수령!"), plugin.getConfig().getString("titles.claim.subtitle", ""));
         MessageUtil.sound(p, "sounds.claim"); draw();

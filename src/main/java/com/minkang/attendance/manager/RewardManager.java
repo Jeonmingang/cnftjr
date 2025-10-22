@@ -89,7 +89,12 @@ public class RewardManager implements Listener {
                 }
             } catch (Throwable ignore) {}
 
-            if (it == null) continue;
+            \1
+            // Guard: avoid giving PAPER items if disabled in config
+            if (!plugin.getConfig().getBoolean("rewards.allow-paper", true)
+                    && it.getType() == org.bukkit.Material.PAPER) {
+                continue;
+            }
             java.util.Map<Integer, org.bukkit.inventory.ItemStack> left = p.getInventory().addItem(it.clone());
             for (org.bukkit.inventory.ItemStack leftover : left.values()) p.getWorld().dropItemNaturally(p.getLocation(), leftover);
         }
@@ -114,7 +119,12 @@ public class RewardManager implements Listener {
                 }
             } catch (Throwable ignore) {}
 
-            if (it == null) continue;
+            \1
+            // Guard: avoid giving PAPER items if disabled in config
+            if (!plugin.getConfig().getBoolean("rewards.allow-paper", true)
+                    && it.getType() == org.bukkit.Material.PAPER) {
+                continue;
+            }
             java.util.Map<Integer, org.bukkit.inventory.ItemStack> left = p.getInventory().addItem(it.clone());
             for (org.bukkit.inventory.ItemStack leftover : left.values()) p.getWorld().dropItemNaturally(p.getLocation(), leftover);
         }
