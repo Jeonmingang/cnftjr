@@ -72,6 +72,11 @@ for (int i = 1; i <= Math.min(rewards.getCycleDays(), daySlots.size()); i++) {
         java.util.List<Integer> daySlots = rewards.daySlots();
         int progress = store.getProgress(id);
         int nextDay = progress + 1;
+        java.util.Map<String, String> tokens = new java.util.HashMap<>();
+        tokens.put("progress", String.valueOf(progress));
+        tokens.put("cycle", String.valueOf(rewards.getCycleDays()));
+        tokens.put("next", String.valueOf(nextDay));
+
         int bonusSlot = plugin.getConfig().getInt("gui.bonus-button-slot", 49);
         if (e.getRawSlot() == bonusSlot) {
             if (e.isRightClick()) { new PreviewGui(p, "&6보너스 미리보기", plugin.rewards().getBonusReward()).open(); return; }
